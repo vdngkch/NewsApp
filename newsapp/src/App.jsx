@@ -1,16 +1,21 @@
 import './App.css'
-import React, {Component, useState} from 'react'
-import NavBar from './components/navbar';
+import React, { useState} from 'react'
+import NavBar from './components/NavBar';
 import News from './components/News';
-import { BrowserRouter,Routes, Route,Link}  from 'react-router-dom';
 
 
 function App(){
   const [searchTerm, setSearchTerm] = useState("");
+  const [category, setCategory] = useState("general");
+
+  const handleCategoryChange = (newCategory) =>{
+    setCategory(newCategory);
+    setSearchTerm("")
+  }
   return(
     <>
-     <NavBar onSearch={(term)=>setSearchTerm(term)}/>
-        <News searchTerm={searchTerm}/>
+     <NavBar onSearch={(term)=>setSearchTerm(term)} onCategoryChange={handleCategoryChange}/>
+      <News searchTerm={searchTerm} category={category}/>
     </>
   )
 }
